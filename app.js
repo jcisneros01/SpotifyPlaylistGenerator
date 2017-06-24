@@ -162,15 +162,19 @@ app.get('/getPlaylist', function(req, res) {
 // Get artist id matching search term
   spotifyApi.searchArtists(artist)
       .then(function(data) {
-        // action
-        console.log('Search artists by ' + artist, data.body.artists.items[0].id);
-        var artistId = data.body.artists.items[0].id;
-          console.log(artistId);
+        // console.log('Search artists by ' + artist, data.body.artists.items[0].id);
+        if (data.body.artists.items.length != 0) {
+          var artistId = data.body.artists.items[0].id;
+        } else {
+          console.log("no results");
+          return;
+        }
+          // console.log(artistId);
 
         // Get an artist's top tracks
         spotifyApi.getArtistTopTracks(artistId, 'US')
           .then(function(data) {
-            console.log(data.body);
+            // console.log(data.body);
 
             context.results = data.body
             res.send(context);
