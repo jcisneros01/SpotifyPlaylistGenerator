@@ -25,6 +25,13 @@ function searchQuery(event) {
 function displayTracks(object) {
   var tracksArray = object.tracks;    
   var results = document.getElementById("results");
+  var button = document.createElement("a");
+  var text = document.createTextNode("Add Playlist");
+  button.appendChild(text);
+  button.href = "http://www.google.com";
+  button.className = "btn btn-primary";
+  button.setAttribute("role", "button");
+
   while (results.firstChild) {
     results.removeChild(results.firstChild);
   }
@@ -44,7 +51,12 @@ function displayTracks(object) {
       var trackNameTextNode = document.createTextNode(trackName);
       trackNode.appendChild(trackNameTextNode);
       list.appendChild(trackNode);
-    }  
+    } 
+
+    results.appendChild(button);
     results.appendChild(list); 
   }    
 }
+
+
+      // <a class="btn btn-primary" href="#" role="button">Add</a>
