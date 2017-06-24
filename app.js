@@ -16,6 +16,15 @@ var client_id = '0588923a886c4624a6e62d82447f8dc5'; // Your client id
 var client_secret = 'b8ed8a0835c5467aa4bdb863e288b7d1'; // Your secret
 var redirect_uri = 'http://localhost:8888/callback'; // Your redirect uri
 
+var SpotifyWebApi = require('spotify-web-api-node');
+
+// credentials are optional
+var spotifyApi = new SpotifyWebApi({
+  clientId : client_id,
+  clientSecret : client_secret,
+  redirectUri : redirect_uri
+});
+
 /**
  * Generates a random string containing numbers and letters
  * @param  {number} length The length of the string
@@ -90,6 +99,10 @@ app.get('/callback', function(req, res) {
         var access_token = body.access_token,
             refresh_token = body.refresh_token;
 
+        // Set access token for future calls.
+        spotifyApi.setAccessToken(access_token);
+        console.log(spotifyApi.getAccessToken());
+
         var options = {
           url: 'https://api.spotify.com/v1/me',
           headers: { 'Authorization': 'Bearer ' + access_token },
@@ -139,6 +152,19 @@ app.get('/refresh_token', function(req, res) {
       });
     }
   });
+});
+
+app.get('/getArtist', function(req, res) {
+  
+      spotifyApi.searchArtists('Love')
+          .then(function(data) {
+            console.log('Search artists by "Love"', data.body);
+          }, function(err) {
+            console.error(err);
+          });
+          
+  console.log(access_token);
+  
 });
 
 console.log('Listening on 8888');
