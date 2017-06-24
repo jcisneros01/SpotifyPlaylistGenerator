@@ -101,7 +101,7 @@ app.get('/callback', function(req, res) {
 
         // Set access token for future calls.
         spotifyApi.setAccessToken(access_token);
-        console.log(spotifyApi.getAccessToken());
+        // console.log(spotifyApi.getAccessToken());
 
         var options = {
           url: 'https://api.spotify.com/v1/me',
@@ -111,7 +111,7 @@ app.get('/callback', function(req, res) {
 
         // use the access token to access the Spotify Web API
         request.get(options, function(error, response, body) {
-          console.log(body);
+          // console.log(body);
         });
 
         // we can also pass the token to the browser to make requests from there
@@ -154,17 +154,36 @@ app.get('/refresh_token', function(req, res) {
   });
 });
 
-app.get('/getArtist', function(req, res) {
-  
-      spotifyApi.searchArtists('Love')
+app.get('/getPlaylist', function(req, res) {
+  var context = {};
+  var artist = req.query.searchKey;
+  // console.log(artist);
+
+// Get artist id matching search term
+  spotifyApi.searchArtists(artist)
+      .then(function(data) {
+        // action
+        console.log('Search artists by ' + artist, data.body.artists.items[0].id);
+        var artistId = data.body.artists.items[0].id;
+          console.log(artistId);
+
+        // Get an artist's top tracks
+        spotifyApi.getArtistTopTracks(artistId, 'US')
           .then(function(data) {
-            console.log('Search artists by "Love"', data.body);
-          }, function(err) {
-            console.error(err);
+            console.log(data.body);
+
+            context.results = data.body
+            res.send(context);
+
+            }, function(err) {
+            console.log('Something went wrong!', err);
           });
-          
-  console.log(access_token);
-  
+
+       
+      }, function(err) {
+        console.error(err);
+      });
+
 });
 
 console.log('Listening on 8888');
