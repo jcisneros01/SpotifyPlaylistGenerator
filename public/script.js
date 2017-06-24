@@ -10,7 +10,7 @@ function searchQuery(event) {
 	 req.addEventListener('load', function() {
 	   if(req.status >= 200 && req.status < 400){
 	     var response = JSON.parse(req.responseText);
-	     // console.log(response.results);
+	     console.log(response.results);
 	     displayTracks(response.results);
 	   } else {
 	       console.log("Error in network request: " + req.statusText);
@@ -23,7 +23,7 @@ function searchQuery(event) {
 
 // Append to list
 function displayTracks(object) {
-  var  tracksArray = object.tracks;    
+  var tracksArray = object.tracks;    
   var results = document.getElementById("results");
   while (results.firstChild) {
     results.removeChild(results.firstChild);
@@ -32,15 +32,19 @@ function displayTracks(object) {
   list.style.listStyle = "none";
   list.className = "list-group";
   // console.log(tracksArray);
-  for (var i = 0; i < 10; i++) { 
-    var trackNode = document.createElement("li");
-    trackNode.className = "list-group-item";
-    var trackName = tracksArray[i].name;
-    // console.log(trackName);
-    var trackNameTextNode = document.createTextNode(trackName);
-    trackNode.appendChild(trackNameTextNode);
-    list.appendChild(trackNode);
+  if (!tracksArray[0]) {
+    alert("Your search returned 0 results.");
   }
-  
-  results.appendChild(list); 
+  else {
+    for (var i = 0; i < 10; i++) { 
+      var trackNode = document.createElement("li");
+      trackNode.className = "list-group-item";
+      var trackName = tracksArray[i].name;
+      // console.log(trackName);
+      var trackNameTextNode = document.createTextNode(trackName);
+      trackNode.appendChild(trackNameTextNode);
+      list.appendChild(trackNode);
+    }  
+    results.appendChild(list); 
+  }    
 }
