@@ -59,4 +59,3 @@ function displayTracks(object) {
 }
 
 
-      // <a class="btn btn-primary" href="#" role="button">Add</a>
