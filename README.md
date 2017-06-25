@@ -9,7 +9,7 @@
 
 <!-- Get an Artist’s Top Tracks API
 	-Retrieve  an array of up to 10 track objects -->
-	
+
 // Fix page layout/UI
 
 // Error handing for search
@@ -20,8 +20,9 @@
 
 <!-- // Create Add playlist button
  -->
-//Create a Playlist:  https://developer.spotify.com/web-api/create-playlist/
-	-Get playlist ID
+ 
+<!-- //Create a Playlist:  https://developer.spotify.com/web-api/create-playlist/
+	-Get playlist ID -->
 
 //Add Tracks to a Playlist: https://developer.spotify.com/web-api/add-tracks-to-playlist/
 	-Submit track uris

@@ -11,12 +11,17 @@ var express = require('express'); // Express web server framework
 var request = require('request'); // "Request" library
 var querystring = require('querystring');
 var cookieParser = require('cookie-parser');
+var app = express();
+
+var bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+var SpotifyWebApi = require('spotify-web-api-node');
 
 var client_id = '0588923a886c4624a6e62d82447f8dc5'; // Your client id
 var client_secret = 'b8ed8a0835c5467aa4bdb863e288b7d1'; // Your secret
 var redirect_uri = 'http://localhost:8888/callback'; // Your redirect uri
-
-var SpotifyWebApi = require('spotify-web-api-node');
 
 // credentials are optional
 var spotifyApi = new SpotifyWebApi({
@@ -24,6 +29,7 @@ var spotifyApi = new SpotifyWebApi({
   clientSecret : client_secret,
   redirectUri : redirect_uri
 });
+
 
 /**
  * Generates a random string containing numbers and letters
@@ -192,28 +198,68 @@ app.get('/getPlaylist', function(req, res) {
 
 app.get('/addPlaylist', function(req, res) {
   var context = {};
-  var playlistName = "Top Tracks";
-  console.log("addPlaylist");
+  var playlistName = req.query.search;
 
-        spotifyApi.getMe()
+  // Get user id 
+  spotifyApi.getMe()
+    .then(function(data) {
+      var userId = data.body.id;
+
+      // Create Playlist
+      spotifyApi.createPlaylist(userId, playlistName, { public : false })
           .then(function(data) {
-            console.log(data.body.id);
-            var userId = data.body.id;
+            addTracks(userId, data.body.id, req.query.search);
 
-            spotifyApi.createPlaylist(userId, playlistName, { public : false })
-              .then(function(data) {
-                console.log(data.body);
-
-                }, function(err) {
-                console.log('Something went wrong with the playlist creation!', err);
-              });
-            
             }, function(err) {
-            console.log('Something went wrong!', err);
+            console.log('Something went wrong with the playlist creation!', err);
+          });
+    
+    }, function(err) {
+    console.log('Something went wrong!', err);
+  });
+
+
+    function addTracks(userId, playlistId, artist) {
+
+      // Get artist id matching search term
+      spotifyApi.searchArtists(artist)
+        .then(function(data) {
+          if (data.body.artists.items.length != 0) {
+            var artistId = data.body.artists.items[0].id;
+          } else {
+            console.log("no results");
+            return;
+          }
+
+          // Get an artist's top tracks
+          spotifyApi.getArtistTopTracks(artistId, 'US')
+            .then(function(data) {
+
+              var dataObject = data.body;
+              var tracksArray = [];
+
+              for (var i = 0; i < 10; i++) {
+               tracksArray.push(dataObject.tracks[i].uri);
+              }
+
+              // Add tracks to a playlist
+              spotifyApi.addTracksToPlaylist(userId, playlistId, tracksArray)
+                .then(function(data) {
+                  console.log('Added tracks to playlist!');
+                }, function(err) {
+                  console.log('Something went wrong!', err);
+                });
+
+              }, function(err) {
+              console.log('Something went wrong!', err);
+            });
+
+           
+          }, function(err) {
+            console.error(err);
           });
 
-
-
+    }
       
 });
 
