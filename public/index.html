@@ -13,21 +13,26 @@
         white-space: nowrap;
         width: 500px;
       }
-    </style>
-   
+      #outerdiv {        
+        overflow:hidden;
+        position:relative;
+      }
+      #inneriframe {
+        position:relative;
+        top:-30px;
+      }
+    </style>   
   </head>
 
   <body>
     <div class="container">
-      <div id="login">
-        <h1>This is an example of the Authorization Code flow</h1>
+      <div id="login">        
         <a href="/login" class="btn btn-primary">Log in with Spotify</a>
       </div>
+
       <div id="loggedin">
-        <div id="user-profile">
-        </div>
-        <div id="oauth">
-        </div>
+        <div id="user-profile"></div>
+        <div id="oauth"></div>
         <button class="btn btn-default" id="obtain-new-token">Obtain new token using the refresh token</button>
       </div>
     </div>
@@ -65,15 +70,16 @@
       <form id="search-form">
           <input type="text" id="query" value="" class="form-control" placeholder="Artist Name"/><br>
           <input type="submit" id="search" class="btn btn-default" value="Search" />
-      </form><br>
-
+      </form>
+      <div class="col-12 col-md-3"></div>
+        <iframe id="inneriframe" name="player" width="300" height="35"></iframe>
+      </div> 
+      <br>
     </div>
+
     <div id="results" class="container">
       <div class="col-12 col-md-3" id="listContent"></div>
-      <div class="col-12 col-md-9" id="albumContent"></div>   
-      <div id="row">
-        <iframe name="player" width="300" heigth="35" style="visibility:hidden;" onload="this.style.visibility='visible';"></iframe>
-      </div> 
+      <div class="col-12 col-md-9" id="albumContent"></div>         
     </div>    
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0-alpha.1/handlebars.min.js"></script>
