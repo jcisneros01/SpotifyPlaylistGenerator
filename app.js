@@ -245,6 +245,7 @@ app.get('/addPlaylist', function(req, res) {
               // Add tracks to a playlist
               spotifyApi.addTracksToPlaylist(userId, playlistId, tracksArray)
                 .then(function(data) {
+                  res.send(context);
                   console.log('Added tracks to playlist!');
                 }, function(err) {
                   console.log('Something went wrong!', err);
