@@ -39,11 +39,6 @@ function displayTracks(object) {
   button.style.color = "white";
   button.style.backgroundColor = "black";
 
-  //Clear the list from previous searches
-  // while (listArea.firstChild) {
-  //   listArea.removeChild(listArea.firstChild);
-  // }  
-
   //Grab the list
   var list = document.createElement("ul");
   list.id = "trackList";
