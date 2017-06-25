@@ -3,36 +3,7 @@
   <head>
     <title>Spotify App</title>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-    <style type="text/css">
-      #login, #loggedin {
-        display: none;
-      }
-      .text-overflow {
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        width: 500px;
-      }
-      .main {
-        background: url(../images/brush.png);      
-      }
-      #pushdiv {
-        height: 15px;
-      }
-      #outerdiv {        
-        overflow:hidden;
-        position:relative;
-        width: 300px;
-        height: 35px;
-      }
-      #inneriframe {
-        position:absolute;
-        top:-43px;
-        padding: 0;
-        margin: 0;
-        border: none;
-      }
-    </style>   
+    <link rel="stylesheet" href="css/style.css">           
   </head>
 
   <body class="main">
@@ -48,9 +19,8 @@
       </div>
     </div>
 
-    <script id="user-profile-template" type="text/x-handlebars-template">
-      <h1>Logged in as {{display_name}}</h1>
-      <div class="media">
+    <script id="user-profile-template" type="text/x-handlebars-template">      
+      <div class="media" style="display:none" >
         <div class="pull-left">
           <img class="media-object" width="150" src="{{images.0.url}}" />
         </div>
@@ -68,14 +38,14 @@
       </div>
     </script>
 
-    <script id="oauth-template" type="text/x-handlebars-template">
-      <h2>oAuth info</h2>
-      <dl class="dl-horizontal">
+    <script id="oauth-template" type="text/x-handlebars-template">      
+      <dl class="dl-horizontal" style="display:none">
         <dt>Access token</dt><dd class="text-overflow">{{access_token}}</dd>
         <dt>Refresh token</dt><dd class="text-overflow">{{refresh_token}}></dd>
       </dl>
     </script>
 
+<!-- Search Area-->
     <div class="container">
       <h2>Get Playlist</h2>
       <form id="search-form">
