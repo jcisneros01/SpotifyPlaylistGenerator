@@ -23,19 +23,11 @@ function searchQuery(event) {
 // Append to list
 function displayTracks(object) {
   var tracksArray = object.tracks;    
-  var results = document.getElementById("results");
-
-  // Create button when list is created
-  var button = document.createElement("a");
-  var text = document.createTextNode("Add Playlist");
-  button.appendChild(text);
-  button.href = "http://www.google.com";
-  button.className = "btn btn-primary";
-  button.setAttribute("role", "button");
+  var listArea = document.getElementById("listContent");
 
   //Clear the list from previous searches
-  while (results.firstChild) {
-    results.removeChild(results.firstChild);
+  while (listArea.firstChild) {
+    listArea.removeChild(listArea.firstChild);
   }
   //Grab the list
   var list = document.createElement("ul");
@@ -52,29 +44,44 @@ function displayTracks(object) {
     for (var i = 0; i < tracksArray.length; i++) { 
 
       //Assign Track Info      
-      var trackName = tracksArray[i].name;      
-      
-      //var trackAlbum = tracksArray[i].album.name;      
-      //var trackAlbCov300px = tracksArray[i].album.images[1].url;
-      //var newCover = document.createElement('img');
-      
+      var trackName = tracksArray[i].name;             
       //Create HTML DOM Elements      
-      var trackNode = document.createElement('a'); //Preview node
-      trackNode.href = tracksArray[i].preview_url; //Preview link      
+      var trackNode = document.createElement('a'); //Preview node      
+      trackNode.id = i;
+      trackNode.onclick = "buildPlayerBox(object, trackNode.id)"
+      trackNode.href = tracksArray[i].preview_url; //Preview link
+      trackNode.target = "player";
       trackNode.className = "list-group-item list-group-item-action"; //Set type      
       trackNode.textContent = trackName;                  
       list.appendChild(trackNode);
-    } 
-
-    results.appendChild(button); 
-    results.appendChild(list); 
+    }      
+    listArea.appendChild(list); 
   }    
 }
 
-// <<<<<<< HEAD
+function buildPlayerBox(object, trackArrayId) {  
+  //Build work the player box will go here  
+  var currentTrack = object.tracks[trackArrayId];  
+  var trackAlbum = currentTrack.album.name;      
+  var trackAlbCov300px = currentTrack.album.images[1].url;
+  
+  //Create DOM elements
+  var albumArea = document.getElementById("albumContent"); //Album Div
+  var newCover = document.createElement('img'); //Album Cover Img
+  var newAname = document.createElement('p'); //Album Name Slot
+  var newAlogo = document.createElement('p'); //Album Cover Slot
+  var br = document.createElement('br');
+  
+  //Clear the album area of previous data
+  while (albumArea.firstChild) {
+    albumArea.removeChild(albumArea.firstChild);
+  }
 
-// =======
-function buildPlayerBox(){
-  //Build work the player box will go here
+  //Assign HTML DOM Elements          
+  newAname.style = "font-weight: bold";
+  newAname.textContent = "Album Name: " + trackAlbum;
+  newAlogo.textContent = "Cover: ";
+  albumArea.appendChild(newAname);      
+  albumArea.appendChild(br);
+  albumArea.appendChild(newAlogo);  
 }
-// >>>>>>> caa4044b3b14522cf4919d1cb6b78a49ff13d654
