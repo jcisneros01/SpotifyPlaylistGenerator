@@ -24,9 +24,9 @@ function searchQuery(event) {
 function displayTracks(object) {
   var tracksArray = object.tracks;    
   var results = document.getElementById("results");
-  var button = document.createElement("a");
 
   // Create button when list is created
+  var button = document.createElement("a");
   var text = document.createTextNode("Add Playlist");
   button.appendChild(text);
   button.href = "http://www.google.com";
@@ -71,10 +71,10 @@ function displayTracks(object) {
   }    
 }
 
-<<<<<<< HEAD
+// <<<<<<< HEAD
 
-=======
+// =======
 function buildPlayerBox(){
   //Build work the player box will go here
 }
->>>>>>> caa4044b3b14522cf4919d1cb6b78a49ff13d654
+// >>>>>>> caa4044b3b14522cf4919d1cb6b78a49ff13d654
