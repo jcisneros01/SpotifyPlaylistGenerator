@@ -40,11 +40,13 @@ function displayTracks(object) {
   button.style.backgroundColor = "gray";
 
   //Clear the list from previous searches
-  while (listArea.firstChild) {
-    listArea.removeChild(listArea.firstChild);
-  }
+  // while (listArea.firstChild) {
+  //   listArea.removeChild(listArea.firstChild);
+  // }  
+
   //Grab the list
   var list = document.createElement("ul");
+  list.id = "trackList";
   list.style.listStyle = "none";
   list.className = "list-group";  
 
@@ -76,10 +78,7 @@ function displayTracks(object) {
       trackNode.addEventListener('click', function() {             
         //Build Player box
         //Clear the album area of previous data
-        var albumArea = document.getElementById("albumContent"); //Album Div
-        while (albumArea.firstChild) {
-          albumArea.removeChild(albumArea.firstChild);
-        }
+        var albumArea = document.getElementById("albumContent"); //Album Div     
 
         //Create DOM elements        
         var newCover = document.createElement('img'); //Album Cover Img        
@@ -87,25 +86,32 @@ function displayTracks(object) {
         //var newAlogo = document.createElement('p'); //Album Cover Slot
         //var br = document.createElement('br');
 
-        //Assign HTML DOM Elements          
-        console.log('Album Cov URL: ' + trackAlbCov640px);
+        //Assign HTML DOM Elements                  
         newCover.src = trackCoverArray[this.id];
         //newAname.style = "font-weight: bold";
         //newAname.textContent = "Album: " + trackAlbum;        
         //albumArea.appendChild(newAname);      
         //albumArea.appendChild(br);
-        //albumArea.appendChild(newAlogo);  
-        albumArea.appendChild(newCover);
+        //albumArea.appendChild(newAlogo); 
+
+        if (albumArea.firstChild)
+          albumArea.replaceChild(newCover, albumArea.firstChild);
+        else
+          albumArea.appendChild(newCover);
       });
       //Append the individual track node to the ul List
       list.appendChild(trackNode);      
     } 
-    //Append the whole list to the List Div 
-    listArea.appendChild(button);
-    listArea.appendChild(list); 
+    //Append the whole list to the List Div     
+    var trackList = document.getElementById("trackList");
+    if (trackList)
+      listArea.replaceChild(list, trackList);          
+    else
+      listArea.appendChild(button);
+      listArea.appendChild(list);      
+    //listArea.insertBefore(button, trackList);
   }    
 }
-
 
 function addPlaylist() {
   var query = document.getElementById("query").value;
