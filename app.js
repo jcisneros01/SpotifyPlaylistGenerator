@@ -239,7 +239,7 @@ app.get('/addPlaylist', function(req, res) {
               var tracksArray = [];
 
               for (var i = 0; i < 10; i++) {
-               tracksArray.push(dataObject.tracks[i].uri);
+                tracksArray.push(dataObject.tracks[i].uri);
               }
 
               // Add tracks to a playlist

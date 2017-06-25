@@ -28,13 +28,17 @@ function displayTracks(object) {
   var listArea = document.getElementById("listContent");
 
   // Create button when list is created
-  var button = document.createElement("a");
-  var text = document.createTextNode("Add Playlist");
+  var button = document.createElement('a'); //Preview node      
+  var text = document.createTextNode("Add Playlist"); 
   button.appendChild(text);
-  button.href = "#";
-  button.className = "btn btn-primary";
+  button.href = "#"
+  button.className = "list-group-item list-group-item-action"; //Set type      
   button.setAttribute("role", "button");
   button.setAttribute("onclick", "addPlaylist()");
+  button.style.textAlign = "center";
+  button.style.color = "white";
+  button.style.backgroundColor = "gray";
+
 
   //Clear the list from previous searches
   while (listArea.firstChild) {
