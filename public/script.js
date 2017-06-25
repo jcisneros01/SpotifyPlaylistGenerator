@@ -81,7 +81,8 @@ function displayTracks(object) {
         var albumArea = document.getElementById("albumContent"); //Album Div     
 
         //Create DOM elements        
-        var newCover = document.createElement('img'); //Album Cover Img        
+        var newCover = document.createElement('img'); //Album Cover Img    
+        newCover.className = "imageBorder";
         //var newAname = document.createElement('p'); //Album Name Slot
         //var newAlogo = document.createElement('p'); //Album Cover Slot
         //var br = document.createElement('br');
