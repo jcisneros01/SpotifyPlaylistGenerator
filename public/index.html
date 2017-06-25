@@ -16,10 +16,14 @@
       #outerdiv {        
         overflow:hidden;
         position:relative;
+        width: 300px;
+        height: 70px;
       }
       #inneriframe {
-        position:relative;
-        top:-30px;
+        position:relative;        
+        padding: 0;
+        margin: 0;
+        border: none;
       }
     </style>   
   </head>
@@ -70,9 +74,9 @@
       <form id="search-form">
           <input type="text" id="query" value="" class="form-control" placeholder="Artist Name"/><br>
           <input type="submit" id="search" class="btn btn-default" value="Search" />
-      </form>
-      <div class="col-12 col-md-3"></div>
-        <iframe id="inneriframe" name="player" width="300" height="35"></iframe>
+      </form>      
+      <div class="col-12 col-md-3" id="outerdiv">
+        <iframe id="inneriframe" name="player"></iframe>
       </div> 
       <br>
     </div>
