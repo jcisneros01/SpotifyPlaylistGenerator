@@ -47,7 +47,7 @@ function displayTracks(object) {
       var curTrack = tracksArray[i];  
       var trackName = curTrack.name;                           
       var trackAlbum = curTrack.album.name;      
-      var trackAlbCov300px = curTrack.album.images[1].url;
+      var trackAlbCov640px = curTrack.album.images[0].url;
 
       //Create HTML DOM Elements      
       var trackNode = document.createElement('a'); //Preview node      
@@ -56,15 +56,13 @@ function displayTracks(object) {
       trackNode.target = "player";
       trackNode.className = "list-group-item list-group-item-action"; //Set type      
       trackNode.textContent = trackName;
-      trackNode.addEventListener('click', function() {     
-        
+      trackNode.addEventListener('click', function() {             
         //Build Player box
-
         //Create DOM elements        
         var newCover = document.createElement('img'); //Album Cover Img        
-        var newAname = document.createElement('p'); //Album Name Slot
+        //var newAname = document.createElement('p'); //Album Name Slot
         var newAlogo = document.createElement('p'); //Album Cover Slot
-        var br = document.createElement('br');
+        //var br = document.createElement('br');
         
         //Clear the album area of previous data
         var albumArea = document.getElementById("albumContent"); //Album Div
@@ -73,12 +71,11 @@ function displayTracks(object) {
         }
 
         //Assign HTML DOM Elements          
-        newCover.src = trackAlbCov300px;
-        newAname.style = "font-weight: bold";
-        newAname.textContent = "Album Name: " + trackAlbum;
-        newAlogo.textContent = "Cover: ";
-        albumArea.appendChild(newAname);      
-        albumArea.appendChild(br);
+        newCover.src = trackAlbCov640px;
+        //newAname.style = "font-weight: bold";
+        //newAname.textContent = "Album: " + trackAlbum;        
+        //albumArea.appendChild(newAname);      
+        //albumArea.appendChild(br);
         albumArea.appendChild(newAlogo);  
         albumArea.appendChild(newCover);
       });
