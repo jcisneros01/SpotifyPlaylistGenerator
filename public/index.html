@@ -68,7 +68,13 @@
       </form><br>
 
     </div>
-    <div id="results"  class="container"></div>
+    <div id="results" class="container">
+      <div class="col-12 col-md-3" id="listContent"></div>
+      <div class="col-12 col-md-9" id="albumContent"></div>   
+      <div id="row">
+        <iframe name="player"></iframe>
+      </div> 
+    </div>    
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0-alpha.1/handlebars.min.js"></script>
     <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
@@ -147,7 +153,7 @@
         }
       })();
     </script>
-    <script src="script.js"></script>
+    <script src="script.js"></script>    
   </body>
 </html>
 
