@@ -44,44 +44,46 @@ function displayTracks(object) {
     for (var i = 0; i < tracksArray.length; i++) { 
 
       //Assign Track Info      
-      var trackName = tracksArray[i].name;             
+      var curTrack = tracksArray[i];  
+      var trackName = curTrack.name;                           
+      var trackAlbum = curTrack.album.name;      
+      var trackAlbCov300px = curTrack.album.images[1].url;
+
       //Create HTML DOM Elements      
       var trackNode = document.createElement('a'); //Preview node      
-      trackNode.id = i;
-      trackNode.onclick = "buildPlayerBox(object, trackNode.id)"
+      trackNode.id = i;      
       trackNode.href = tracksArray[i].preview_url; //Preview link
       trackNode.target = "player";
       trackNode.className = "list-group-item list-group-item-action"; //Set type      
-      trackNode.textContent = trackName;                  
-      list.appendChild(trackNode);
+      trackNode.textContent = trackName;
+      trackNode.addEventListener('click', function() {     
+        
+        //Build Player box
+
+        //Create DOM elements        
+        var newCover = document.createElement('img'); //Album Cover Img        
+        var newAname = document.createElement('p'); //Album Name Slot
+        var newAlogo = document.createElement('p'); //Album Cover Slot
+        var br = document.createElement('br');
+        
+        //Clear the album area of previous data
+        var albumArea = document.getElementById("albumContent"); //Album Div
+        while (albumArea.firstChild) {
+          albumArea.removeChild(albumArea.firstChild);
+        }
+
+        //Assign HTML DOM Elements          
+        newCover.src = trackAlbCov300px;
+        newAname.style = "font-weight: bold";
+        newAname.textContent = "Album Name: " + trackAlbum;
+        newAlogo.textContent = "Cover: ";
+        albumArea.appendChild(newAname);      
+        albumArea.appendChild(br);
+        albumArea.appendChild(newAlogo);  
+        albumArea.appendChild(newCover);
+      });
+      list.appendChild(trackNode);      
     }      
     listArea.appendChild(list); 
   }    
-}
-
-function buildPlayerBox(object, trackArrayId) {  
-  //Build work the player box will go here  
-  var currentTrack = object.tracks[trackArrayId];  
-  var trackAlbum = currentTrack.album.name;      
-  var trackAlbCov300px = currentTrack.album.images[1].url;
-  
-  //Create DOM elements
-  var albumArea = document.getElementById("albumContent"); //Album Div
-  var newCover = document.createElement('img'); //Album Cover Img
-  var newAname = document.createElement('p'); //Album Name Slot
-  var newAlogo = document.createElement('p'); //Album Cover Slot
-  var br = document.createElement('br');
-  
-  //Clear the album area of previous data
-  while (albumArea.firstChild) {
-    albumArea.removeChild(albumArea.firstChild);
-  }
-
-  //Assign HTML DOM Elements          
-  newAname.style = "font-weight: bold";
-  newAname.textContent = "Album Name: " + trackAlbum;
-  newAlogo.textContent = "Cover: ";
-  albumArea.appendChild(newAname);      
-  albumArea.appendChild(br);
-  albumArea.appendChild(newAlogo);  
 }
