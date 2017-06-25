@@ -53,7 +53,7 @@ app.get('/login', function(req, res) {
   res.cookie(stateKey, state);
 
   // your application requests authorization
-  var scope = 'user-read-private user-read-email';
+  var scope = 'user-read-private user-read-email playlist-modify-private playlist-modify-public';
   res.redirect('https://accounts.spotify.com/authorize?' +
     querystring.stringify({
       response_type: 'code',
@@ -188,6 +188,33 @@ app.get('/getPlaylist', function(req, res) {
         console.error(err);
       });
 
+});
+
+app.get('/addPlaylist', function(req, res) {
+  var context = {};
+  var playlistName = "Top Tracks";
+  console.log("addPlaylist");
+
+        spotifyApi.getMe()
+          .then(function(data) {
+            console.log(data.body.id);
+            var userId = data.body.id;
+
+            spotifyApi.createPlaylist(userId, playlistName, { public : false })
+              .then(function(data) {
+                console.log(data.body);
+
+                }, function(err) {
+                console.log('Something went wrong with the playlist creation!', err);
+              });
+            
+            }, function(err) {
+            console.log('Something went wrong!', err);
+          });
+
+
+
+      
 });
 
 console.log('Listening on 8888');

@@ -10,7 +10,7 @@ function searchQuery(event) {
 	 req.addEventListener('load', function() {
 	   if(req.status >= 200 && req.status < 400){
 	     var response = JSON.parse(req.responseText);
-	     console.log(response.results);
+	     // console.log(response.results);
 	     displayTracks(response.results);
 	   } else {
 	       console.log("Error in network request: " + req.statusText);
@@ -29,7 +29,7 @@ function displayTracks(object) {
   var button = document.createElement("a");
   var text = document.createTextNode("Add Playlist");
   button.appendChild(text);
-  button.href = "http://www.google.com";
+  button.href = "/addPlaylist";
   button.className = "btn btn-primary";
   button.setAttribute("role", "button");
 
@@ -78,3 +78,5 @@ function buildPlayerBox(){
   //Build work the player box will go here
 }
 // >>>>>>> caa4044b3b14522cf4919d1cb6b78a49ff13d654
+
+

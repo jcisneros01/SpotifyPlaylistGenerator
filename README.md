@@ -14,12 +14,12 @@
 
 // Error handing for search
 
-// Make list item change colors when you hover over it
-
+<!-- // Make list item change colors when you hover over it
+ -->
 // Clicking on list item plays 30 second clip of song
 
-// Create Add playlist button
-
+<!-- // Create Add playlist button
+ -->
 //Create a Playlist:  https://developer.spotify.com/web-api/create-playlist/
 	-Get playlist ID
 
