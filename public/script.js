@@ -39,7 +39,6 @@ function displayTracks(object) {
   button.style.color = "white";
   button.style.backgroundColor = "gray";
 
-
   //Clear the list from previous searches
   while (listArea.firstChild) {
     listArea.removeChild(listArea.firstChild);
@@ -102,7 +101,7 @@ function displayTracks(object) {
       list.appendChild(trackNode);      
     } 
     //Append the whole list to the List Div 
-    listArea.appendChild(button)    
+    listArea.appendChild(button);
     listArea.appendChild(list); 
   }    
 }
