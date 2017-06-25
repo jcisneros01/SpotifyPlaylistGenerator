@@ -37,7 +37,7 @@ function displayTracks(object) {
   button.setAttribute("onclick", "addPlaylist()");
   button.style.textAlign = "center";
   button.style.color = "white";
-  button.style.backgroundColor = "gray";
+  button.style.backgroundColor = "black";
 
   //Clear the list from previous searches
   // while (listArea.firstChild) {
