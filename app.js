@@ -264,5 +264,5 @@ app.get('/addPlaylist', function(req, res) {
       
 });
 
-console.log('Listening on 8887');
+console.log('Listening on 8888');
 app.listen(8888);
