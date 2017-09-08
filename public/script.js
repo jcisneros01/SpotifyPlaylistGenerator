@@ -37,7 +37,9 @@ function displayTracks(object) {
   button.setAttribute("onclick", "addPlaylist()");
   button.style.textAlign = "center";
   button.style.color = "white";
-  button.style.backgroundColor = "black";
+  button.style.backgroundColor = "#dddedf";
+  button.style.color = "black";
+
 
   //Grab the list
   var list = document.createElement("ul");

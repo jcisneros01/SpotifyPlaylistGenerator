@@ -22,6 +22,7 @@ var SpotifyWebApi = require('spotify-web-api-node');
 var client_id = '0588923a886c4624a6e62d82447f8dc5'; // Your client id
 var client_secret = 'b8ed8a0835c5467aa4bdb863e288b7d1'; // Your secret
 var redirect_uri = 'http://138.197.198.178:8888/callback'; // Your redirect uri
+// var redirect_uri = 'http://localhost:8888/callback'; // Your redirect uri
 
 // credentials are optional
 var spotifyApi = new SpotifyWebApi({
@@ -168,20 +169,16 @@ app.get('/getPlaylist', function(req, res) {
 // Get artist id matching search term
   spotifyApi.searchArtists(artist)
       .then(function(data) {
-        // console.log('Search artists by ' + artist, data.body.artists.items[0].id);
         if (data.body.artists.items.length != 0) {
           var artistId = data.body.artists.items[0].id;
         } else {
           console.log("no results");
           return;
         }
-          // console.log(artistId);
 
         // Get an artist's top tracks
         spotifyApi.getArtistTopTracks(artistId, 'US')
           .then(function(data) {
-            // console.log(data.body);
-
             context.results = data.body
             res.send(context);
 
