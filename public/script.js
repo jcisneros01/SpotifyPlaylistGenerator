@@ -11,7 +11,6 @@ function searchQuery(event) {
 	 req.addEventListener('load', function() {
 	   if(req.status >= 200 && req.status < 400){
 	     var response = JSON.parse(req.responseText);
-	     // console.log(response.results);
        tracks = response.results;
 	     displayTracks(response.results);
 	   } else {
@@ -40,7 +39,6 @@ function displayTracks(object) {
   button.style.backgroundColor = "#dddedf";
   button.style.color = "black";
 
-
   //Grab the list
   var list = document.createElement("ul");
   list.id = "trackList";
@@ -52,18 +50,13 @@ function displayTracks(object) {
     alert("Your search returned 0 results.");
   }  
   else {    
-    //Full track work
-    var trackCoverArray = [];
-    trackCoverArray.length = tracksArray.length;
+
     for (var i = 0; i < tracksArray.length; i++) { 
 
       //Assign Track Info      
       var curTrack = tracksArray[i];  
       var trackName = curTrack.name;                           
       var trackAlbum = curTrack.album.name;      
-      var trackAlbCov640px = curTrack.album.images[0].url;
-      trackCoverArray[i] = trackAlbCov640px;
-      //console.log('Album Cov URL: ' + trackAlbCov640px);
 
       //Create HTML DOM Elements      
       var trackNode = document.createElement('a'); //Preview node      
@@ -72,34 +65,11 @@ function displayTracks(object) {
       trackNode.target = "player";
       trackNode.className = "list-group-item list-group-item-action"; //Set type      
       trackNode.textContent = trackName;
-      trackNode.addEventListener('click', function() {             
-        //Build Player box
-        //Clear the album area of previous data
-        var albumArea = document.getElementById("albumContent"); //Album Div     
-
-        //Create DOM elements        
-        var newCover = document.createElement('img'); //Album Cover Img    
-        newCover.className = "imageBorder";
-        //var newAname = document.createElement('p'); //Album Name Slot
-        //var newAlogo = document.createElement('p'); //Album Cover Slot
-        //var br = document.createElement('br');
-
-        //Assign HTML DOM Elements                  
-        newCover.src = trackCoverArray[this.id];
-        //newAname.style = "font-weight: bold";
-        //newAname.textContent = "Album: " + trackAlbum;        
-        //albumArea.appendChild(newAname);      
-        //albumArea.appendChild(br);
-        //albumArea.appendChild(newAlogo); 
-
-        if (albumArea.firstChild)
-          albumArea.replaceChild(newCover, albumArea.firstChild);
-        else
-          albumArea.appendChild(newCover);
-      });
+      
       //Append the individual track node to the ul List
       list.appendChild(trackNode);      
     } 
+
     //Append the whole list to the List Div     
     var trackList = document.getElementById("trackList");
     if (trackList)
@@ -107,7 +77,6 @@ function displayTracks(object) {
     else
       listArea.appendChild(button);
       listArea.appendChild(list);      
-    //listArea.insertBefore(button, trackList);
   }    
 }
 

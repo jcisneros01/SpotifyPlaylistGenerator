@@ -1,8 +1,7 @@
 <!doctype html>
 <html>
   <head>
-    <title>Spotify Preview Playlist Generator</title>
-    <meta name="author" content="Jared Parkinson" charset="UTF-8"> 
+    <title>Spotify GetPlaylist</title>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">           
   </head>
@@ -11,7 +10,7 @@
   <section id="bg1" class="topBar">
     <div class="inner">
       <div class="writing">       
-        <h1>Spotify Playlist Generator</h1>          
+        <h1>Spotify GetPlaylist</h1>          
         <div class="container">
           <div id="login">        
             <a href="/login" class="btn btn-primary">Log in with Spotify</a>
@@ -19,7 +18,6 @@
           <div id="loggedin">
             <div id="user-profile"></div>
             <div id="oauth"></div>
-          <!--   <button class="btn btn-default" id="obtain-new-token">Obtain new token using the refresh token</button> -->
           </div>
         </div>
       </div>
@@ -48,8 +46,7 @@
     <script id="oauth-template" type="text/x-handlebars-template">      
       <dl class="dl-horizontal" style="display:none">
         <dt>Access token</dt><dd class="text-overflow">{{access_token}}</dd>
-<!--         <dt>Refresh token</dt><dd class="text-overflow">{{refresh_token}}></dd>
- -->      </dl>
+      </dl>
     </script>
 
 <!-- Search Area-->
@@ -63,13 +60,9 @@
         </form>
       <br>
     </div>
-
-<!--     <br>
- -->
     <div id="results" class="container">
       <div id="listContent"></div>
-<!--       <div class="col-12 col-md-8" id="albumContent"></div>         
- -->    </div>    
+    </div>    
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0-alpha.1/handlebars.min.js"></script>
     <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
@@ -130,21 +123,6 @@
               $('#login').show();
               $('#loggedin').hide();
           }
-
-          document.getElementById('obtain-new-token').addEventListener('click', function() {
-            $.ajax({
-              url: '/refresh_token',
-              data: {
-                'refresh_token': refresh_token
-              }
-            }).done(function(data) {
-              access_token = data.access_token;
-              oauthPlaceholder.innerHTML = oauthTemplate({
-                access_token: access_token,
-                refresh_token: refresh_token
-              });
-            });
-          }, false);
         }
       })();
     </script>

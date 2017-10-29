@@ -108,7 +108,6 @@ app.get('/callback', function(req, res) {
 
         // Set access token for future calls.
         spotifyApi.setAccessToken(access_token);
-        // console.log(spotifyApi.getAccessToken());
 
         var options = {
           url: 'https://api.spotify.com/v1/me',
@@ -118,7 +117,6 @@ app.get('/callback', function(req, res) {
 
         // use the access token to access the Spotify Web API
         request.get(options, function(error, response, body) {
-          // console.log(body);
         });
 
         // we can also pass the token to the browser to make requests from there
@@ -164,7 +162,6 @@ app.get('/refresh_token', function(req, res) {
 app.get('/getPlaylist', function(req, res) {
   var context = {};
   var artist = req.query.searchKey;
-  // console.log(artist);
 
 // Get artist id matching search term
   spotifyApi.searchArtists(artist)
