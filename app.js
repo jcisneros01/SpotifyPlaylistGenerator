@@ -7,17 +7,20 @@
  * https://developer.spotify.com/web-api/authorization-guide/#authorization_code_flow
  */
 
+
 var express = require('express'); // Express web server framework
 var request = require('request'); // "Request" library
 var querystring = require('querystring');
 var cookieParser = require('cookie-parser');
 var app = express();
+require('dotenv').config()
 
 var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 var SpotifyWebApi = require('spotify-web-api-node');
+
 var api_key = process.env.API_KEY;
 var token = process.env.TOKEN;
 
