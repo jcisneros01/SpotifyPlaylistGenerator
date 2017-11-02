@@ -16,11 +16,14 @@ var app = express();
 var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-require('dotenv').config()
 
 var SpotifyWebApi = require('spotify-web-api-node');
-var client_id = process.env.API_KEY; // Your client id
-var client_secret = process.env.TOKEN; // Your secret
+var api_key = process.env.API_KEY;
+var token = process.env.TOKEN;
+
+
+var client_id = api_key; // Your client id
+var client_secret = token; // Your secret
 // var redirect_uri = 'http://138.197.198.178:8888/callback'; // Your redirect uri
 var redirect_uri = 'http://localhost:8888/callback'; // Your redirect uri
 
@@ -30,6 +33,7 @@ var spotifyApi = new SpotifyWebApi({
   clientSecret : client_secret,
   redirectUri : redirect_uri
 });
+
 
 /**
  * Generates a random string containing numbers and letters
